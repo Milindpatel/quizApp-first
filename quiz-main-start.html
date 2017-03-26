@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>quiz-main-start</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link href = "quiz.css" rel="stylesheet" />
+
+  
+</head>
+
+<body>
+  <div data-role="page">
+   
+      <header data-role="header" id= "title"><h1>Quiz Application</h1></header>
+
+
+      <div role="main" class="ui-content" id="startQuiz">
+        <h2 align = "center">User Information:</h2>
+
+        <label for="txtFirstName" >First Name<span id = "firstNameError">*</span></label>
+        <input type="text" name="txtFirstName" id="txtFirstName" class = "user" placeholder="First Name">
+        
+        <label for="txtLastName">Last Name<span id ="lastNameError">*</span></label>
+        <input type="text" name="txtLastName" id="txtLastName"class = "user" placeholder="Last Name">
+     
+        <label for="txtEmail">Email Address<span id="emailError">*</span></label>
+        <input type="text" name="txtEmail" id="txtEmail" class = "user" placeholder="Email">
+
+         <label for="txtPass">Password<span id="passError">*</span></label>
+        <input type="password" name="txtPass" id="txtPass" class = "user" placeholder="Password">
+   
+        <label for="txtPhone">Phone Number<span id = "phoneError">*</span></label>
+        <input type="text" name="txtPhone" id="txtPhone" class = "user" placeholder="Phone Number" >
+    
+        <label for="txtAddress">Address<span id="addressError">*</span></label>
+        <input type="text" name="txtAddress" id="txtAddress" class = "user" placeholder="Address">
+       
+        <br>
+        <br>
+        <button  data-role="button" id= "startButton" align= "right" onclick="startQuiz();">Submit And Start</button>
+      </div>
+
+
+     
+    <footer data-role="footer" class="ui-content">
+        &copy; Oxygen (Milind Patel)
+    </footer>
+  </div>
+
+   <script src="quiz_script.js"></script>
+
+  
+  
+</body>
+</html>

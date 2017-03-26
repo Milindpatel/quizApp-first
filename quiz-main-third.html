@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>quiz-main-second</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link href = "quiz.css" rel="stylesheet" />
+
+  
+</head>
+
+<body>
+  <div data-role="page">
+   
+      <header data-role="header" id= "title"><h1>Quiz Application</h1></header>
+
+      
+    
+     
+
+      <!--division for question-->
+      <div id= "quizContainer" class="container" >
+
+    	<section class="ui-content" role="main" >
+      <div id= "question"> </div>
+      <form>
+      <label ><input type="radio" name = "option" class="option" value="1" /><span id="opt1"></span></label>
+    	<label ><input type="radio" name = "option" class="option" value="2" /><span id="opt2"></span> </label>
+      <label ><input type="radio" name = "option" class="option" value="3" /><span id="opt3"></span> </label>
+    	<label ><input type="radio" name = "option" class="option" value="4" /><span id="opt4"></span> </label>
+      </form>
+    	<button  data-role="button" id= "nextButton" align= "right" onclick="loadNextQuestion();">Next</button>
+       </section>
+
+      </div>
+    
+      <!--division for result-->
+       <div data-role="main" id= "result" style="display:none;">
+         <div id="result1"></div>
+    	  <button  data-role="button" id= "restartButton"  onclick="location.href ='quiz-main-start.html'">Restart</button>
+         
+      
+       </div>
+  
+    <br>
+    <br>
+    <footer data-role="footer" class="ui-content">
+        &copy; Oxygen (Milind Patel)
+    </footer>
+  </div>
+
+   
+   
+   
+  <!--start of quiz script--> 
+   <script>
+   var currentQuestion = 0;
+var score = 0;
+var questions = [{
+	"question": " What does CSS stand for?  ",
+	"option1": "Creative Style Sheets",
+	"option2": "Colorful Style Sheets",
+	"option3": "Cascading Style Sheets",
+	"option4": "Computer Style Sheets",
+	"answer": "3"
+}, {
+	"question": "What is the correct HTML for referring to an external style sheet. ",
+	"option1": "<stylesheet>mystyle.css</stylesheet />",
+	"option2": "<style src=”mystyle.css” />",
+	"option3": "<link rel=”stylesheet” type=”text/css” href=”mystyle.css”>",
+	"option4": "None of the above",
+	"answer": "3"
+}, {
+	"question": " Where in an HTML document is the correct place to refer to an external style sheet? ",
+	"option1": "At the end of the document",
+	"option2": "In the head section",
+	"option3": "At the top of the document",
+	"option4": "In the body section",
+	"answer": "2"
+}, {
+	"question": "When a visitor clicks the submit button on a form, the ______ of each form element.  ",
+	"option1": "label",
+	"option2": "name",
+	"option3": "value",
+	"option4": "name-value pair",
+	"answer": "4"
+}, {
+	"question": "Which HTML tag is used to define an internal style sheet? ",
+	"option1": "<style>",
+	"option2": "<css>",
+	"option3": "<script>",
+	"option4": "None of the above",
+	"answer": "1"
+}, {
+	"question": "Which HTML attribute is used to define inline styles? ",
+	"option1": "font",
+	"option2": "class",
+	"option3": "styles",
+	"option4": "style",
+	"answer": "4"
+}, {
+	"question": "Which is the correct CSS syntax? ",
+	"option1": "body {color: black}",
+	"option2": "{body;color:black}",
+	"option3": "{body:color=black(body}",
+	"option4": "body:color=black",
+	"answer": "1"
+}, {
+	"question": "How do you insert a comment in a CSS file? ",
+	"option1": "// this is a comment //",
+	"option2": "/* this is a comment */",
+	"option3": "‘ this is a comment",
+	"option4": "// this is a comment",
+	"answer": "2"
+}, {
+	"question": "How do you add a background color for all <h1> elements?  ",
+	"option1": "all.h1 {background-color:#FFFFFF}",
+	"option2": "h1.all {background-color:#FFFFFF}",
+	"option3": " h1 {background-color:#FFFFFF}",
+	"option4": "None of the above",
+	"answer": "3"
+}, {
+	"question": "Which property is used to change the background color? ",
+	"option1": "bgcolor:",
+	"option2": "background-color:",
+	"option3": "color:",
+	"option4": "None of the above",
+	"answer": "2"
+},{
+	"question": "How do you change the text color of an element? ",
+	"option1": "text-color=",
+	"option2": "fgcolor:",
+	"option3": "color:",
+	"option4": "text-color:",
+	"answer": "3"
+}, {
+	"question": "Which CSS property controls the text size? ",
+	"option1": "font-size",
+	"option2": "font-style",
+	"option3": "text-style",
+	"option4": "text-size",
+	"answer": "1"
+}, {
+	"question": "What is the correct CSS syntax for making all the <p> elements bold? ",
+	"option1": "<p style=”text-size:bold”>",
+	"option2": "p {font-weight:bold}",
+	"option3": "p {text-size:bold}",
+	"option4": "<p style=”font-size:bold”>",
+	"answer": "2"
+}, {
+	"question": "How do you display hyperlinks without an underline? ",
+	"option1": "a {text-decoration:no underline}",
+	"option2": "a {decoration:no underline}",
+	"option3": "a {text-decoration:none}",
+	"option4": "a {underline:none}",
+	"answer": "3"
+}, {
+	"question": "How do you make each word in a text start with a capital letter? ",
+	"option1": "text-transform:capitalize",
+	"option2": "You can’t do that with CSS",
+	"option3": "text-transform:uppercase",
+	"option4": "None of the above",
+	"answer": "1"
+}, {
+	"question": "How do you change the font of an element? ",
+	"option1": "font-family:",
+	"option2": "font=",
+	"option3": "f:",
+	"option4": "None of the above",
+	"answer": "1"
+}, {
+	"question": "How do you make the text bold? ",
+	"option1": "font:b",
+	"option2": "font-weight:bold",
+	"option3": "style:bold",
+	"option4": "None of the above",
+	"answer": "2"
+}, {
+	"question": "How do you change the left margin of an element? ",
+	"option1": "margin:",
+	"option2": "indent:",
+	"option3": "margin-left:",
+	"option4": "text-indent:",
+	"answer": "3"
+}, {
+	"question": "How do you make a list that lists its items with squares? ",
+	"option1": "list-type: square",
+	"option2": "type: square",
+	"option3": "type: 2",
+	"option4": "list-style-type: square",
+	"answer": "4"
+}, {
+	"question": "In a table, the CSS __________ property can be used to specify the amount of space between the borders of each cell. ",
+	"option1": "border-padding",
+	"option2": "padding",
+	"option3": "spacing",
+	"option4": "border-spacing",
+	"answer": "4"
+}
+];
+
+
+
+var container = $("#quizContainer");
+var questionEl = $("#question");
+var opt1 = $("#opt1");
+var opt2 = $("#opt2");
+var opt3 = $("#opt3");
+var opt4 = $("#opt4");
+var nextButton = $("#nextButton");
+var resultCont = $("#result1");
+var startCont = $("#startQuiz");
+
+
+		var index;
+        // var questions;
+        for (var i = questions.length - 1; i > 0; i--) {
+            //get random number
+            index = Math.floor((Math.random() * i));
+            //swapping
+            temp = questions[index];
+            questions[index] = questions[i];
+            questions[i] = temp;
+        }
+
+
+
+
+
+
+//for quiz-main-second
+
+function loadQuestion (questionIndex) {
+
+	
+	var q = questions[questionIndex];
+	questionEl.text((questionIndex + 1) + ". " + q.question);
+	opt1.text(q.option1);
+	opt2.text(q.option2);
+	opt3.text(q.option3);
+	opt4.text(q.option4);
+};
+
+function loadNextQuestion () {
+	var selectedOption = $("input[type*=radio]:checked").each(function (){});
+	if(!selectedOption.val()){
+		alert("Please select your answer!");
+		return;
+	}
+	var answer = selectedOption.val();
+	
+	if(questions[currentQuestion].answer == answer){
+		score += 1;
+	}
+	$("input[type='radio']").attr("checked",false).checkboxradio("refresh");
+	currentQuestion++;
+	if(currentQuestion == 10 - 1){
+		nextButton.text("Finish");
+	}
+	if(currentQuestion == 10){
+		$("#quizContainer").hide();
+		$("#result").show();
+		if(score == 8|| score == 9 || score == 10){
+			resultCont.show();	
+			resultCont.text("You have successfully passed the test. You are now certified in CSS Trainning, your score is: " + score);
+		}else{
+			resultCont.text("Unfortunately you did not pass the test. Please try again later!");
+		}
+		
+		return;
+	}
+	loadQuestion(currentQuestion);
+}
+
+loadQuestion(currentQuestion);
+
+</script>
+ <!--end of quiz script--> 
+  
+  
+</body>
+</html>
